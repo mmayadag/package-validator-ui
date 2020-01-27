@@ -1,7 +1,7 @@
 <script>
     import Container from '../components/Container/Container.svelte';
     import Select from '../components/Select/Select.svelte';
-
+    const api = '//localhost:3288';
     let repoURL = "";
     // https://github.com/mmayadag/package-validator-ui.git
     // https://github.com/mmayadag/s3-hello.git
@@ -48,7 +48,7 @@
     async function isValidRepo() {
         if( owner == '' || repo == '') { return; }
         const res = await fetch(
-            `http://localhost:3000/repo/isValid/${owner}/${repo}`
+            `${api}/repo/isValid/${owner}/${repo}`
         );
 
         if (res.ok) {
@@ -63,7 +63,7 @@
         let data = {email, period , owner ,repo};
         console.log({email,period});
         const res = await fetch(
-            `http://localhost:3000/repo/schedule`,
+            `${api}/repo/schedule`,
             { 
                 method: 'POST',
                 headers: {
