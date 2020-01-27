@@ -118,12 +118,7 @@ function is(p){
         font-weight: bold;
         font-size: 14px;
     }
-    .green{
-        color:#2ecc71;
-    }
-    .red{
-        color:red;
-    }
+    
 </style>
 
 <Container>
