@@ -14,10 +14,13 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: #554d56;
 		text-transform: uppercase;
 		font-size: 3rem;
-		font-weight: 100;
+		font-weight: 300;
+		line-height: 48px;
+		font-size: 36px;
+    
 	}
 	.cardContainer{
 		display: flex;

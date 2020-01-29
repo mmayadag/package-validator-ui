@@ -88,7 +88,9 @@ function findPackages() {
 function is(p){
     period=p;
 }
-
+function repoUrlChange(newUrl){
+    repoURL = newUrl;
+}
 </script>
 <style>
     
@@ -106,10 +108,13 @@ function is(p){
         margin: 0 1rem 0 0.2rem;
     }
     button{
-        background-color: #2ecc71;
-        padding: 10px 60px;
-        margin-bottom: 0;
-        min-width:241px;
+        height: 48px;
+        border-radius: 2px;
+        background-color: #419C1C;
+        margin: 24px 16px;
+        width: 360px;
+        color: #fff;
+
     }
     button:disabled{
         background-color: white;
@@ -122,10 +127,15 @@ function is(p){
 </style>
 
 <Container>
-    <input placeholder="Repo Url" bind:value={repoURL} />
-    {#if isRepo}<img alt="status" class="status-icon" src={icon}/>{/if}
+    <p>
+        <label for="repoUrl">RepoUrl</label>
+        <input placeholder="Repo Url" id="repoUrl" bind:value={repoURL} />
+        {#if isRepo}<img alt="status" class="status-icon" src={icon}/>{/if}
+    </p>
 </Container>
-
+<Container>
+    <button on:click|preventDefault={()=> repoUrlChange("https://github.com/mmayadag/bicycle-in-izmir.git")}>test</button>
+</Container>
 <Container>
     <p>
         <label for="owner">Owner</label>
