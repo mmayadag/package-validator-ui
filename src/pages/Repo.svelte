@@ -1,7 +1,8 @@
 <script>
     import Container from '../components/Container/Container.svelte';
     import Select from '../components/Select/Select.svelte';
-    const api = '//localhost:3288';
+    const { host, protocol } = document.location
+    const api = `${protocol}//${host}`;
     let repoURL = "";
     // https://github.com/mmayadag/package-validator-ui.git
     // https://github.com/mmayadag/s3-hello.git
