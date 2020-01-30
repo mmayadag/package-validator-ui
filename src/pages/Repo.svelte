@@ -2,7 +2,8 @@
     import Container from '../components/Container/Container.svelte';
     import Select from '../components/Select/Select.svelte';
     const { host, protocol } = document.location
-    const api = `${protocol}//${host}`;
+    let api = `${protocol}//${host}`;
+    api = `https://validator.mayadag.com`;
     let repoURL = "";
     // https://github.com/mmayadag/package-validator-ui.git
     // https://github.com/mmayadag/s3-hello.git
@@ -12,7 +13,7 @@
     let error = '';
     let valid = '';
     let email = '';
-    let period = '';
+    let period = 24;
     let analyze = false; 
     $: {
         period = ( period != '' && !isNaN(period) ) ? parseInt(period) : '';
@@ -134,9 +135,8 @@ function repoUrlChange(newUrl){
         {#if isRepo}<img alt="status" class="status-icon" src={icon}/>{/if}
     </p>
 </Container>
-<Container>
-    <button on:click|preventDefault={()=> repoUrlChange("https://github.com/mmayadag/bicycle-in-izmir.git")}>test</button>
-</Container>
+
+<!--
 <Container>
     <p>
         <label for="owner">Owner</label>
@@ -147,32 +147,34 @@ function repoUrlChange(newUrl){
         <input placeholder="repo" bind:value={repo} />
     </p>
 </Container>
-
+-->
 {#if valid}
 <div><i class="green">This is public repo</i></div>
 
 <h3> Enter your information</h3>
 <Container> 
     <p>
-        <label for="owner">Email</label>
+        <label for="Email">Email</label>
         <input placeholder="enter your email" bind:value={email} />
     </p>
-    <p>
+    <!--<p>
         <label for="repo">Period</label>
         <Select fn={is} />
-    </p>
+    </p>-->
 </Container>
 {:else if valid === false}
 <div><i class="red">This is not public repo</i></div>
 {/if}
 
+
 <Container>
-    <button disabled={!isRepo || !analyze} on:click={findPackages}>
-    {#if isRepo}
-        Analyze
-    {:else}{error != '' ?  error : 'Enter repo details'}
+    {#if analyze}
+        <button disabled={!isRepo || !analyze} on:click={findPackages}>
+        {#if isRepo}
+            Analyze
+        {/if}
+        </button>
     {/if}
-    </button>
 </Container>
 
 <Container>
@@ -185,4 +187,10 @@ function repoUrlChange(newUrl){
             <p class="red">{error.message}</p>
         {/await}
     {/if}
+</Container>
+
+
+
+<Container>
+    <span on:click|preventDefault={()=> repoUrlChange("https://github.com/mmayadag/bicycle-in-izmir.git")}>TEST > mmayadag/bicycle-in-izmir</span>
 </Container>
